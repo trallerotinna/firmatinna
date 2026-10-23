@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Generador de Firma T-Innova</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f5f7fa;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:32px 16px}
+  .card{background:#fff;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,.08);max-width:580px;width:100%;padding:32px}
+  .header{border-top:3px solid #0078C8;padding-top:16px;margin-bottom:24px}
+  .header h1{font-size:18px;font-weight:700;color:#192744;margin-bottom:4px}
+  .header p{font-size:13px;color:#888}
+  label{display:block;font-size:10px;font-weight:600;color:#0078C8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+  input{width:100%;border:1px solid #c5ddf0;border-radius:6px;padding:9px 10px;font-size:13px;color:#192744;outline:none;margin-bottom:14px;font-family:inherit}
+  input:focus{border-color:#0078C8}
+  .note{background:#f0f7fc;border:1px solid #c5ddf0;border-radius:6px;padding:10px 12px;margin-bottom:20px;font-size:12px;color:#555}
+  .note strong{color:#0078C8}
+  .btn-primary{background:#0078C8;color:#fff;border:none;border-radius:6px;padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+  .btn-primary:hover{background:#005fa3}
+  .btn-ghost{background:transparent;color:#666;border:1.5px solid #ddd;border-radius:6px;padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+  .btn-ghost:hover{background:#f5f5f5}
+  .btn-download{background:#0078C8;color:#fff;border:none;border-radius:6px;padding:9px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:14px}
+  .btn-download:hover{background:#005fa3}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap}
+  #preview-section{display:none}
+  .preview-wrap{border:1px solid #e0edf5;border-top:3px solid #0078C8;border-radius:4px;overflow:hidden;margin-bottom:20px}
+  .sig-table{font-family:'Segoe UI',Arial,sans-serif;width:100%;border-collapse:collapse}
+  .sig-left{background:#f0f7fc;padding:14px 16px;border-right:2px solid #0078C8;width:210px;vertical-align:top}
+  .sig-right{background:#fff;padding:14px 16px 14px 20px;vertical-align:top}
+  .sig-logos{display:flex;align-items:center;margin-bottom:14px}
+  .sig-logo-divider{width:1px;height:20px;background:#c5ddf0;margin:0 12px}
+  .sig-accent{width:28px;height:2px;background:#0078C8;margin-bottom:10px}
+  .sig-name{font-size:14px;font-weight:700;color:#192744;margin-bottom:2px;line-height:1.2}
+  .sig-title{font-size:9px;font-weight:600;color:#0078C8;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .sig-contact-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:11.5px}
+  .sig-contact-row.phone{margin-bottom:10px}
+  .sig-divider-v{width:1px;height:11px;background:#c5ddf0;flex-shrink:0}
+  .sig-icons{display:flex;gap:5px}
+  .sig-disclaimer{border-top:1px solid #e0edf5;padding:8px 16px;background:#f8fbfd;font-size:9px;color:#b0b8c1;line-height:1.5}
+  .instructions{background:#fffbea;border:1px solid #f0d080;border-radius:8px;padding:16px 18px;margin-top:16px;display:none}
+  .instructions h3{font-size:13px;font-weight:600;color:#7a5c00;margin-bottom:10px}
+  .instructions ol{padding-left:20px;font-size:13px;color:#555;line-height:2}
+  .instructions ol strong{color:#333}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div id="form-section">
+    <div class="header">
+      <h1>Generador de firma T-Innova</h1>
+      <p>Rellena tus datos y genera tu firma personalizada</p>
+    </div>
+    <label for="inp-name">Nombre completo</label>
+    <input id="inp-name" type="text" value="">
+    <label for="inp-title">Cargo</label>
+    <input id="inp-title" type="text" value="">
+    <label for="inp-email">Email</label>
+    <input id="inp-email" type="email" value="">
+    <label for="inp-mobile">Móvil <span style="color:#bbb;font-weight:400;text-transform:none;letter-spacing:0">(opcional)</span></label>
+    <input id="inp-mobile" type="tel" value="" placeholder="">
+    <label for="inp-phone">Teléfono fijo</label>
+    <input id="inp-phone" type="tel" value="902 678 900">
+    <button class="btn-primary" onclick="showPreview()">Ver firma →</button>
+  </div>
+
+  <div id="preview-section">
+    <div style="font-size:17px;font-weight:700;color:#192744;margin-bottom:4px">Tu firma</div>
+    <div style="font-size:13px;color:#888;margin-bottom:16px">Vista previa — lista para usar en Outlook</div>
+    <div class="preview-wrap">
+      <table class="sig-table">
+        <tr>
+          <td class="sig-left">
+            <div class="sig-logos">
+              <img src="https://trallerotinna.github.io/firmatinna/logo-tinnova.png" alt="T-Innova" style="height:24px;display:block">
+              <div class="sig-logo-divider"></div>
+              <img src="https://trallerotinna.github.io/firmatinna/logo-valsoft.png" alt="Valsoft" style="height:17px;display:block">
+            </div>
+            <div class="sig-accent"></div>
+            <div class="sig-name" id="prev-name">Federico Wechsler</div>
+            <div class="sig-title" id="prev-title">Professional Services Team Lead</div>
+          </td>
+          <td class="sig-right">
+            <div class="sig-contact-row">
+              <img src="https://trallerotinna.github.io/firmatinna/icon-email.png" width="13" height="13" alt="" style="flex-shrink:0">
+              <span id="prev-email" style="font-size:11.5px;color:#0078C8">federico.wechsler@t-innova.com</span>
+            </div>
+            <div class="sig-contact-row phone">
+              <img src="https://trallerotinna.github.io/firmatinna/icon-phone.png" width="13" height="13" alt="" style="flex-shrink:0">
+              <span id="prev-phone" style="font-size:11.5px;color:#333">902 678 900</span>
+              <div class="sig-divider-v" id="prev-mobile-divider"></div>
+              <img id="prev-mobile-icon" src="https://trallerotinna.github.io/firmatinna/icon-mobile.png" width="13" height="13" alt="" style="flex-shrink:0">
+              <span id="prev-mobile" style="font-size:11.5px;color:#333">630.829.175</span>
+            </div>
+            <div class="sig-icons">
+              <img src="https://trallerotinna.github.io/firmatinna/icon-linkedin.png" width="24" height="24" alt="LinkedIn">
+              <img src="https://trallerotinna.github.io/firmatinna/icon-map.png" width="24" height="24" alt="Mapa">
+              <img src="https://trallerotinna.github.io/firmatinna/icon-web.png" width="24" height="24" alt="Web">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="sig-disclaimer">
+            NOTA: La información contenida tanto en este email, como en los documentos adjuntos, es información confidencial y privilegiada para uso exclusivo de la persona o personas a las que va dirigido. No está permitido el acceso a este mensaje a cualquier otra persona distinta a los indicados. Si no es uno de los destinatarios o ha recibido este mensaje por error, cualquier duplicación, reproducción, distribución, así como cualquier uso de la información contenida o cualquiera otra acción tomada en relación con el mismo, está prohibida y puede ser ilegal.<br>
+            <span style="color:#4a9e4a">&#9850; Antes de imprimir este mensaje, asegúrese de que es necesario hacerlo.</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" onclick="toggleInstructions()">&#128203; Cómo instalar la firma</button>
+      <button class="btn-ghost" onclick="showForm()">&#8592; Editar</button>
+    </div>
+    <div class="instructions" id="instructions">
+      <h3>Instrucciones para Outlook</h3>
+      <ol>
+        <li>Pulsa <strong>Descargar HTML</strong> aquí abajo y abre el archivo en tu navegador</li>
+        <li>Selecciona todo el contenido con <strong>Ctrl+A</strong> y cópialo con <strong>Ctrl+C</strong></li>
+        <li>En Outlook ve a <strong>Configuración → Cuenta → Firmas</strong></li>
+        <li>Crea una firma nueva y pega el contenido con <strong>Ctrl+V</strong></li>
+        <li>Guarda y asigna la firma a tu cuenta</li>
+      </ol>
+      <button class="btn-download" onclick="downloadHTML()">&#8681; Descargar HTML</button>
+    </div>
+  </div>
+
+</div>
+<script>
+const TINNOVA  = "https://trallerotinna.github.io/firmatinna/logo-tinnova.png";
+const VALSOFT  = "https://trallerotinna.github.io/firmatinna/logo-valsoft.png";
+const LINKEDIN = "https://trallerotinna.github.io/firmatinna/icon-linkedin.png";
+const MAP      = "https://trallerotinna.github.io/firmatinna/icon-map.png";
+const WEB      = "https://trallerotinna.github.io/firmatinna/icon-web.png";
+const EMAIL_I  = "https://trallerotinna.github.io/firmatinna/icon-email.png";
+const PHONE_I  = "https://trallerotinna.github.io/firmatinna/icon-phone.png";
+const MOBILE_I = "https://trallerotinna.github.io/firmatinna/icon-mobile.png";
+
+function showPreview(){
+  const name=document.getElementById('inp-name').value.trim();
+  const title=document.getElementById('inp-title').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const mobile=document.getElementById('inp-mobile').value.trim();
+  const phone=document.getElementById('inp-phone').value.trim()||'902 678 900';
+  document.getElementById('prev-name').textContent=name;
+  document.getElementById('prev-title').textContent=title;
+  document.getElementById('prev-email').textContent=email;
+  document.getElementById('prev-phone').textContent=phone;
+  const mEl=document.getElementById('prev-mobile');
+  const mIc=document.getElementById('prev-mobile-icon');
+  const mDv=document.getElementById('prev-mobile-divider');
+  if(mobile){mEl.textContent=mobile;mEl.style.display='';mIc.style.display='';mDv.style.display='';}
+  else{mEl.style.display='none';mIc.style.display='none';mDv.style.display='none';}
+  document.getElementById('form-section').style.display='none';
+  document.getElementById('preview-section').style.display='block';
+  document.getElementById('instructions').style.display='none';
+}
+function showForm(){
+  document.getElementById('form-section').style.display='block';
+  document.getElementById('preview-section').style.display='none';
+}
+function toggleInstructions(){
+  const el=document.getElementById('instructions');
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+function buildHTML(){
+  const name=document.getElementById('inp-name').value.trim();
+  const title=document.getElementById('inp-title').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const mobile=document.getElementById('inp-mobile').value.trim();
+  const phone=document.getElementById('inp-phone').value.trim()||'902 678 900';
+  const mob=mobile?`
+    <td style="padding:0 8px;vertical-align:middle;"><div style="width:1px;height:11px;background:#c5ddf0;"></div></td>
+    <td style="padding-right:8px;vertical-align:middle;"><img src="${MOBILE_I}" width="13" height="13" alt="" style="display:block;border:0;"></td>
+    <td style="vertical-align:middle;"><a href="tel:${mobile.replace(/\D/g,'')}" style="font-size:11.5px;color:#333;text-decoration:none;">${mobile}</a></td>`:'';
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="margin:0;padding:0;background:#fff;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Segoe UI',Arial,sans-serif;max-width:620px;border-top:3px solid #0078C8;">
+<tr>
+<td style="vertical-align:top;background:#f0f7fc;padding:14px 16px;width:210px;border-right:2px solid #0078C8;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;"><tr>
+<td style="padding-right:12px;vertical-align:middle;"><a href="https://www.t-innova.com" target="_blank"><img src="${TINNOVA}" alt="T-Innova" height="24" style="display:block;border:0;height:24px;"></a></td>
+<td style="border-left:1px solid #c5ddf0;padding-left:12px;vertical-align:middle;"><a href="https://www.valsoftcorp.com" target="_blank"><img src="${VALSOFT}" alt="Valsoft" height="17" style="display:block;border:0;height:17px;"></a></td>
+</tr></table>
+<div style="width:28px;height:2px;background:#0078C8;margin-bottom:10px;"></div>
+<p style="margin:0 0 2px;font-size:14px;font-weight:700;color:#192744;line-height:1.2;">${name}</p>
+<p style="margin:0;font-size:9px;font-weight:600;color:#0078C8;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;">${title}</p>
+</td>
+<td style="vertical-align:top;padding:14px 16px 14px 20px;background:#ffffff;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;"><tr>
+<td style="padding-right:8px;vertical-align:middle;"><img src="${EMAIL_I}" width="13" height="13" alt="" style="display:block;border:0;"></td>
+<td><a href="mailto:${email}" style="font-size:11.5px;color:#0078C8;text-decoration:none;">${email}</a></td>
+</tr></table>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr>
+<td style="padding-right:8px;vertical-align:middle;"><img src="${PHONE_I}" width="13" height="13" alt="" style="display:block;border:0;"></td>
+<td style="vertical-align:middle;"><a href="tel:+34${phone.replace(/\D/g,'')}" style="font-size:11.5px;color:#333;text-decoration:none;">${phone}</a></td>
+${mob}
+</tr></table>
+<table cellpadding="0" cellspacing="0" border="0"><tr>
+<td style="padding-right:5px;"><a href="https://www.linkedin.com/company/t-innova" target="_blank"><img src="${LINKEDIN}" width="24" height="24" alt="LinkedIn" style="display:block;border:0;"></a></td>
+<td style="padding-right:5px;"><a href="https://maps.google.com/?q=Ronda+Can+Rabad%C3%A0+2,+Castelldefels+08860" target="_blank"><img src="${MAP}" width="24" height="24" alt="Ubicación" style="display:block;border:0;"></a></td>
+<td><a href="https://www.t-innova.com" target="_blank"><img src="${WEB}" width="24" height="24" alt="Web" style="display:block;border:0;"></a></td>
+</tr></table>
+</td></tr>
+<tr><td colspan="2" style="border-top:1px solid #e0edf5;padding:8px 16px;background:#f8fbfd;">
+<p style="margin:0 0 3px;font-size:9px;color:#b0b8c1;line-height:1.5;">NOTA: La información contenida tanto en este email, como en los documentos adjuntos, es información confidencial y privilegiada para uso exclusivo de la persona o personas a las que va dirigido. No está permitido el acceso a este mensaje a cualquier otra persona distinta a los indicados. Si no es uno de los destinatarios o ha recibido este mensaje por error, cualquier duplicación, reproducción, distribución, así como cualquier uso de la información contenida o cualquiera otra acción tomada en relación con el mismo, está prohibida y puede ser ilegal.</p>
+<p style="margin:0;font-size:9px;color:#4a9e4a;">&#9850; Antes de imprimir este mensaje, asegúrese de que es necesario hacerlo.</p>
+</td></tr>
+</table></body></html>`;
+}
+function downloadHTML(){
+  const name=document.getElementById('inp-name').value.trim();
+  const blob=new Blob([buildHTML()],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='firma_'+name.split(' ')[0].toLowerCase()+'.html';
+  a.click();URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
